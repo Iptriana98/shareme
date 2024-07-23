@@ -1,6 +1,6 @@
-import { defineType, defineField } from "sanity";
+import { defineType } from "sanity";
 
-export const PostedByType = defineType({
+export const postedByType = defineType({
     name: 'postedBy',
     title: 'PostedBy',
     type: 'reference',
