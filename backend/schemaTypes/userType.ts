@@ -6,12 +6,12 @@ export const userType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'name',
+      name: 'userName',
       type: 'string',
     }),
     defineField({
       name: 'image',
-      type: 'image',
+      type: 'string',
     }),
   ],
 })
