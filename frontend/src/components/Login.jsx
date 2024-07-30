@@ -11,22 +11,17 @@ const Login = () => {
     const responseGoogle = (response) => {
         try {
             const decodedToken = JSON.parse(atob(response.credential.split('.')[1]));
-            console.log('Decoded token:', decodedToken);
       
             localStorage.setItem('user', JSON.stringify(decodedToken));
       
             const { name, picture, sub } = decodedToken;
-      
-            console.log(`Name: ${name}, Google ID: ${sub}, Image URL: ${picture}`);
-      
+
             const doc = {
               _id: sub,
               _type: 'user',
               userName: name,
               image: picture,
             };
-
-            console.log('client', client.config());
       
             client.createIfNotExists(doc).then(() => {
               navigate('/', { replace: true });
