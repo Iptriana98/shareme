@@ -4,35 +4,32 @@ import { useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import shareVideo from '../assets/share.mp4'
 import logo from '../assets/logowhite.png'
-import client from '../container/client'
+import { client } from '../container/client'
 
 const Login = () => {
     const navigate = useNavigate()
     const responseGoogle = (response) => {
-        try {
-            const decodedToken = JSON.parse(atob(response.credential.split('.')[1]));
-      
-            localStorage.setItem('user', JSON.stringify(decodedToken));
-      
-            const { name, picture, sub } = decodedToken;
+        const decodedToken = JSON.parse(atob(response.credential.split('.')[1]));
+        console.log('Decoded token:', decodedToken);
 
-            const doc = {
-              _id: sub,
-              _type: 'user',
-              userName: name,
-              image: picture,
-            };
+        localStorage.setItem('user', JSON.stringify(decodedToken));
 
-            console.log(doc);
-      
-            client.createIfNotExists(doc).then(() => {
-              navigate('/', { replace: true });
-            }).catch((error) => {
-              console.error('Error creating document:', error.message);
-            });
-          } catch (error) {
-            console.error('Error processing Google login response:', error.message);
-          }
+        const { name, picture, sub } = decodedToken;
+
+        console.log(`Name: ${name}, Google ID: ${sub}, Image URL: ${picture}`);
+
+        const doc = {
+            _id: sub,
+            _type: 'user',
+            userName: name,
+            image: picture
+        };
+
+        client.createIfNotExists(doc).then(() => {
+            navigate('/', { replace: true });
+        }).catch((error) => {
+            console.error('Error creating document:', error.message);
+        });
     }
 
     return (
