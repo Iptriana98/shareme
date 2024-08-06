@@ -7,6 +7,7 @@ import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 
 import { client, urlFor } from '../client';
 import { fetchUser } from '../utils/fetchUser';
+import { fixStrEncoding } from '../utils/utils';
 
 const Pin = ({ pin }) => {
   const [postHovered, setPostHovered] = useState(false);
@@ -134,7 +135,7 @@ const Pin = ({ pin }) => {
           src={postedBy?.image}
           alt="user-profile"
         />
-        <p className="font-semibold capitalize">{postedBy?.userName}</p>
+        <p className="font-semibold capitalize">{fixStrEncoding(postedBy?.userName)}</p>
       </Link>
     </div>
   );
