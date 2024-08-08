@@ -4,6 +4,7 @@ import {RiHomeFill} from 'react-icons/ri'
 import {IoIosArrowForward} from 'react-icons/io'
 import logo from '../assets/logo.png'
 import { categories } from '../utils/data'
+import { fixStrEncoding } from '../utils/utils'
 
 const isNotActiveStyle = 'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize';
 const isActiveStyle = 'flex items-center px-5 gap-3 font-extrabold border-r-2 border-black  transition-all duration-200 ease-in-out capitalize';
@@ -54,7 +55,7 @@ const Sidebar = ({ closeToggle, user }) => {
           onClick={handleCloseSidebar}
         >
           <img src={user.image} className="w-10 h-10 rounded-full" alt="user-profile" />
-          <p>{user.userName}</p>
+          <p>{fixStrEncoding(user.userName)}</p>
           <IoIosArrowForward />
         </Link>
       )}
